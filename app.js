@@ -6,7 +6,7 @@ let ob1 = {
   city: "Madrid",
   country: "Spain",
   top_scorers: ["Ronaldo", "Benzema", "Hazard"],
-  fan_count: "798",
+  fan_count: 798,
 };
 
 let ob2 = {
@@ -14,7 +14,7 @@ let ob2 = {
   city: "Barcelona",
   country: "Spain",
   top_scorers: ["Messi", "Suarez", "Puyol"],
-  fan_count: "738",
+  fan_count: 738,
 };
 
 let ob3 = {
@@ -22,7 +22,7 @@ let ob3 = {
   city: "Manchester",
   country: "England",
   top_scorers: ["Cantona", "Rooney", "Ronaldo"],
-  fan_count: "755",
+  fan_count: 755,
 };
 
 let ob4 = {
@@ -30,7 +30,7 @@ let ob4 = {
   city: "Manchester",
   country: "England",
   top_scorers: ["Sterling", "Aguero", "Haaland"],
-  fan_count: "537",
+  fan_count: 537,
 };
 
 let ob5 = {
@@ -38,7 +38,7 @@ let ob5 = {
   city: "Not applicable",
   country: "Brazil",
   top_scorers: ["Ronaldinho", "Cafu", "Bebeto"],
-  fan_count: "950",
+  fan_count: 950,
 };
 
 let ob6 = {
@@ -46,7 +46,7 @@ let ob6 = {
   city: "Not applicable",
   country: "Argentina",
   top_scorers: ["Messi", "Batistuta", "Maradona"],
-  fan_count: "888",
+  fan_count: 888,
 };
 
 let ob7 = {
@@ -54,8 +54,10 @@ let ob7 = {
   city: "Madrid",
   country: "Spain",
   top_scorers: ["Aragonés", "Griezmann", "Torez"],
-  fan_count: "400",
+  fan_count: 400,
 };
+
+//TASK 1
 
 // db.collection("teams").add(ob1);
 // db.collection("teams").add(ob2);
@@ -64,3 +66,46 @@ let ob7 = {
 // db.collection("teams").add(ob5);
 // db.collection("teams").add(ob6);
 // db.collection("teams").add(ob7);
+
+// TASK 2
+
+const teams = db.collection("teams");
+const outputDiv = document.getElementById("output");
+
+function displayResult(title, data) {
+  const section = document.createElement("div");
+  section.innerHTML = `<h3>${title}</h3><pre>${JSON.stringify(
+    data,
+    null,
+    2
+  )}</pre>`;
+  outputDiv.appendChild(section);
+}
+
+//Query 1 - show all teams in Spain
+teams
+  .where("country", "==", "Spain")
+  .get()
+  .then((snapshot) => {
+    const data = snapshot.docs.map((doc) => doc.data());
+    displayResult("Query 1 - Teams in Spain", data);
+  });
+
+//Query 2 - show all teams in Madrid, Spain
+teams
+  .where("country", "==", "Spain")
+  .where("city", "==", "Madrid")
+  .get()
+  .then((snapshot) => {
+    const data = snapshot.docs.map((doc) => doc.data());
+    displayResult("Query 2 - Teams in Madrid, Spain", data);
+  });
+
+//Query 3 - Show all national teams (Remember there might be new national teams added later)
+teams
+  .where("city", "==", "Not applicable")
+  .get()
+  .then((snapshot) => {
+    const data = snapshot.docs.map((doc) => doc.data());
+    displayResult("Query 3 - National Teams", data);
+  });
