@@ -172,3 +172,106 @@ teams
       data
     );
   });
+
+//TASK 3
+//a. updating existing data
+
+//1.
+
+// db.collection("teams")
+//   .where("team_name", "==", "Real Madrid")
+//   .get()
+//   .then((snapshot) => {
+//     snapshot.docs[0].ref.update({
+//       fan_count: 811,
+//       team_name: "Real Madrid FC",
+//     });
+//   });
+
+// //2.
+
+// db.collection("teams")
+//   .where("team_name", "==", "Barcelona")
+//   .get()
+//   .then((snapshot) => {
+//     snapshot.docs[0].ref.update({
+//       fan_count: 747,
+//       team_name: "FC Barcelona",
+//     });
+//   });
+// 3. Real Madrid FC → remove "Hazard", add "Crispo"
+db.collection("teams")
+  .where("team_name", "==", "Real Madrid FC")
+  .get()
+  .then((snapshot) => {
+    const docRef = snapshot.docs[0].ref;
+    docRef
+      .update({
+        top_scorers: firebase.firestore.FieldValue.arrayRemove("Hazard"),
+      })
+      .then(() => {
+        docRef.update({
+          top_scorers: firebase.firestore.FieldValue.arrayUnion("Crispo"),
+        });
+      });
+  });
+// 4. Barcelona: Remove Puyol from the list and add Deco to the list
+db.collection("teams")
+  .where("team_name", "==", "FC Barcelona")
+  .get()
+  .then((snapshot) => {
+    const docRef = snapshot.docs[0].ref;
+    docRef
+      .update({
+        top_scorers: firebase.firestore.FieldValue.arrayRemove("Puyol"),
+      })
+      .then(() => {
+        docRef.update({
+          top_scorers: firebase.firestore.FieldValue.arrayUnion("Deco"),
+        });
+      });
+  });
+
+// b. creating new fields (colors)
+db.collection("teams")
+  .where("team_name", "==", "Real Madrid FC")
+  .get()
+  .then((snapshot) => {
+    snapshot.docs[0].ref.update({
+      color: {
+        home: "White",
+        away: "Black",
+      },
+    });
+  });
+
+db.collection("teams")
+  .where("team_name", "==", "FC Barcelona")
+  .get()
+  .then((snapshot) => {
+    snapshot.docs[0].ref.update({
+      color: {
+        home: "White",
+        away: "Black",
+      },
+    });
+  });
+
+// c. & d. updates to the colors
+db.collection("teams")
+  .where("team_name", "==", "Real Madrid FC")
+  .get()
+  .then((snapshot) => {
+    snapshot.docs[0].ref.update({
+      "color.away": "Purple",
+    });
+  });
+
+db.collection("teams")
+  .where("team_name", "==", "FC Barcelona")
+  .get()
+  .then((snapshot) => {
+    snapshot.docs[0].ref.update({
+      "color.away": "Pink",
+    });
+  });
