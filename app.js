@@ -1,4 +1,5 @@
 console.log(firebase);
+console.log("hello");
 
 let ob1 = {
   team_name: "Real Madrid",
@@ -55,3 +56,11 @@ let ob7 = {
   top_scorers: ["Aragonés", "Griezmann", "Torez"],
   fan_count: "400",
 };
+
+// db.collection("teams").add(ob1);
+// db.collection("teams").add(ob2);
+// db.collection("teams").add(ob3);
+// db.collection("teams").add(ob4);
+// db.collection("teams").add(ob5);
+// db.collection("teams").add(ob6);
+// db.collection("teams").add(ob7);

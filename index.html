@@ -18,34 +18,6 @@
   </head>
 
   <body>
-    <div
-      id="people"
-      class="has-background-lightgray p-4 m-3 has-background-grey-lighter"
-    >
-      <h1 class="title">Add a person to the DB</h1>
-      <p>Name: <input type="text" id="name" /></p>
-      <p>age: <input type="text" id="age" /></p>
-      <p>
-        Favourite color:
-        <select id="favcolor">
-          <option value="red">Red</option>
-          <option value="green">Green</option>
-          <option value="blue">Blue</option>
-        </select>
-      </p>
-
-      <!-- add people to the DB -->
-      <button id="submit">Submit</button>
-    </div>
-
-    <!-- all people from the database -->
-    <div
-      id="all_people"
-      class="has-background-lightgray p-4 m-3 has-background-grey-lighter"
-    >
-      <h1 class="title">All people stored in the database</h1>
-    </div>
-
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -62,17 +34,17 @@
     <script>
       // TODO
       // Copy **only** your firebaseConfig from Google Firebae and add it below
-      const firebaseConfig = {
-        apiKey: "AIzaSyC2GR8JGETT23HzLUmjfk9CtBQTnPq-XeI",
-        authDomain: "is424-e013b.firebaseapp.com",
-        projectId: "is424-e013b",
-        storageBucket: "is424-e013b.firebasestorage.app",
-        messagingSenderId: "593580754721",
-        appId: "1:593580754721:web:200c1031721e05923d2060",
-        measurementId: "G-EZ8PMWZ92H",
-      };
 
       // Your web app's Firebase configuration
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAduTHkMfJnkCLlOxuTmafGvF1uXbiX86I",
+        authDomain: "project-6796168189357611711.firebaseapp.com",
+        projectId: "project-6796168189357611711",
+        storageBucket: "project-6796168189357611711.firebasestorage.app",
+        messagingSenderId: "890189308680",
+        appId: "1:890189308680:web:5a9fc0aacdea17e0e382bd",
+      };
 
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
