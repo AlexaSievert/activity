@@ -1,5 +1,4 @@
 console.log(firebase);
-console.log("hello");
 
 let ob1 = {
   team_name: "Real Madrid",
@@ -199,40 +198,45 @@ teams
 //       team_name: "FC Barcelona",
 //     });
 //   });
+
 // 3. Real Madrid FC → remove "Hazard", add "Crispo"
-db.collection("teams")
-  .where("team_name", "==", "Real Madrid FC")
-  .get()
-  .then((snapshot) => {
-    const docRef = snapshot.docs[0].ref;
-    docRef
-      .update({
-        top_scorers: firebase.firestore.FieldValue.arrayRemove("Hazard"),
-      })
-      .then(() => {
-        docRef.update({
-          top_scorers: firebase.firestore.FieldValue.arrayUnion("Crispo"),
-        });
-      });
-  });
+
+// db.collection("teams")
+//   .where("team_name", "==", "Real Madrid FC")
+//   .get()
+//   .then((snapshot) => {
+//     const docRef = snapshot.docs[0].ref;
+//     docRef
+//       .update({
+//         top_scorers: firebase.firestore.FieldValue.arrayRemove("Hazard"),
+//       })
+//       .then(() => {
+//         docRef.update({
+//           top_scorers: firebase.firestore.FieldValue.arrayUnion("Crispo"),
+//         });
+//       });
+//   });
+
 // 4. Barcelona: Remove Puyol from the list and add Deco to the list
-db.collection("teams")
-  .where("team_name", "==", "FC Barcelona")
-  .get()
-  .then((snapshot) => {
-    const docRef = snapshot.docs[0].ref;
-    docRef
-      .update({
-        top_scorers: firebase.firestore.FieldValue.arrayRemove("Puyol"),
-      })
-      .then(() => {
-        docRef.update({
-          top_scorers: firebase.firestore.FieldValue.arrayUnion("Deco"),
-        });
-      });
-  });
+
+// db.collection("teams")
+//   .where("team_name", "==", "FC Barcelona")
+//   .get()
+//   .then((snapshot) => {
+//     const docRef = snapshot.docs[0].ref;
+//     docRef
+//       .update({
+//         top_scorers: firebase.firestore.FieldValue.arrayRemove("Puyol"),
+//       })
+//       .then(() => {
+//         docRef.update({
+//           top_scorers: firebase.firestore.FieldValue.arrayUnion("Deco"),
+//         });
+//       });
+//   });
 
 // b. creating new fields (colors)
+
 db.collection("teams")
   .where("team_name", "==", "Real Madrid FC")
   .get()
@@ -258,6 +262,7 @@ db.collection("teams")
   });
 
 // c. & d. updates to the colors
+
 db.collection("teams")
   .where("team_name", "==", "Real Madrid FC")
   .get()
