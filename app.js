@@ -86,7 +86,7 @@ teams
   .where("country", "==", "Spain")
   .get()
   .then((snapshot) => {
-    const data = snapshot.docs.map((doc) => doc.data());
+    const data = snapshot.docs.map((doc) => doc.data().team_name);
     displayResult("Query 1 - Teams in Spain", data);
   });
 
@@ -96,7 +96,7 @@ teams
   .where("city", "==", "Madrid")
   .get()
   .then((snapshot) => {
-    const data = snapshot.docs.map((doc) => doc.data());
+    const data = snapshot.docs.map((doc) => doc.data().team_name);
     displayResult("Query 2 - Teams in Madrid, Spain", data);
   });
 
@@ -105,7 +105,7 @@ teams
   .where("city", "==", "Not applicable")
   .get()
   .then((snapshot) => {
-    const data = snapshot.docs.map((doc) => doc.data());
+    const data = snapshot.docs.map((doc) => doc.data().team_name);
     displayResult("Query 3 - National Teams", data);
   });
 
@@ -114,7 +114,7 @@ teams
   .where("country", "!=", "Spain")
   .get()
   .then((snapshot) => {
-    const data = snapshot.docs.map((doc) => doc.data());
+    const data = snapshot.docs.map((doc) => doc.data().team_name);
     displayResult("Query 4 - Non-Spain Teams", data);
   });
 
@@ -127,7 +127,8 @@ teams
     const nonSpainOrEngland = nonSpainTeams.filter(
       (team) => team.country !== "England"
     );
-    displayResult("Query 5 - Teams NOT in Spain or England", nonSpainOrEngland);
+    const teamNames = nonSpainOrEngland.map((team) => team.team_name);
+    displayResult("Query 5 - Teams NOT in Spain or England", teamNames);
   });
 
 //Query 6 - Show all teams in Spain with more than 700M fans
@@ -137,8 +138,8 @@ teams
   .then((snapshot) => {
     const spainTeams = snapshot.docs.map((doc) => doc.data());
     const result = spainTeams.filter((team) => team.fan_count > 700);
-    console.log(result);
-    displayResult("Query 6 - Spain Teams with >700M Fans", result);
+    const teamNames = result.map((team) => team.team_name);
+    displayResult("Query 6 - Spain Teams with >700M Fans", teamNames);
   });
 
 //Query 7 - Show all teams with a number of fans in the range of 500M and 600M
@@ -147,7 +148,7 @@ teams
   .where("fan_count", "<=", 600)
   .get()
   .then((snapshot) => {
-    const data = snapshot.docs.map((doc) => doc.data());
+    const data = snapshot.docs.map((doc) => doc.data().team_name);
     displayResult("Query 7 - Teams with 500M to 600M Fans", data);
   });
 
@@ -156,7 +157,7 @@ teams
   .where("top_scorers", "array-contains", "Ronaldo")
   .get()
   .then((snapshot) => {
-    const data = snapshot.docs.map((doc) => doc.data());
+    const data = snapshot.docs.map((doc) => doc.data().team_name);
     displayResult("Query 8 - Teams where Ronaldo is a Top Scorer", data);
   });
 
@@ -165,7 +166,7 @@ teams
   .where("top_scorers", "array-contains-any", ["Ronaldo", "Maradona", "Messi"])
   .get()
   .then((snapshot) => {
-    const data = snapshot.docs.map((doc) => doc.data());
+    const data = snapshot.docs.map((doc) => doc.data().team_name);
     displayResult(
       "Query 9 - Teams where Ronaldo, Maradona, or Messi is a Top Scorer",
       data
